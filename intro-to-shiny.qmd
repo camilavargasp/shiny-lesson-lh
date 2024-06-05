@@ -111,7 +111,7 @@ Example of input widgets and an output plot.
 Reactivity is **what makes Shiny apps responsive** i.e. it lets the app instantly update itself whenever the user makes a change. At a very basic level, it looks something like this:
 
 
-![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/reactivity-intro.png)
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/reactivity-intro.png){width="80%"}
 
 :::callout-tip
 ## How to understand reactivity?
@@ -120,9 +120,64 @@ Check out Garrett Grolemund’s article, [_How to understand reactivity_](https:
 :::
 
 
+## On file organization
 
 
-Creating your first Shiny App - Boilerpalete template provided by RStudio (why yes, why no) - One-file App Example (From template) -- Follow example on video. (20 min) - Let's start from scratch -- to help us remember the structure - Create a git hub repo - clone - repo structure (10 min) - 1-file simple app (25 min) - Exercise 1 (15 min)
+Before we jump into RStudio to create a Shiny app there a couple more things worth mentioning about the structure of an app. First, when creating an app you have the option of either creating a **single-file app** or a **two-file app**. The in both cases look the same, however the difference is you either have all the code for you app (ui + server) in one script named `app.R` or you have 2 files, one for ui (`ui.R) and one for then server (server.R)
+
+
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/one-vs-two.png)
+
+
+::: {.callout-caution icon="false"}
+## Which one to choose?
+
+It largely comes down to personal preference. A single-file format is best for smaller apps or when creating a reproducible example ([reprex](https://mastering-shiny.org/action-workflow.html#getting-help)). While the two-file format is beneficial when writing large, complex apps where breaking apart code can make things a bit more navigable / maintainable.
+
+:::
+
+<br>
+
+Second, as we have learned through this course, it is always a good idea to create a GitHub repository + an `Rproj` to house all the moving pieces of our app. The image below presents a general repo structure to stay organized. We will follow this structure for the apps we will create during this lesson.
+
+<br>
+
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/repo-structure-details.png)
+
+
+
+## Creating a Shiny app
+
+::: callout-tip
+## Set up
+
+1.  Create a repo to house our soon-to-be app(s). Navigate to your GitHub account, go to Your repositories > Click on New repository. Named it `shiny-app-example` Remember to initiate your repo with a README and choose R as the language for the default `.gitignore`.
+
+2.  Clone your repo into your RStudio Session in the server. Click on the green "< >Code" button > Copy the HTTPS url and then go to RStudio
+
+3. In RStudio Create a new project. Go to File > New Project > Version Control with Git > paste Repository url > Create Project
+
+<br>
+
+The GIF bellow shows each of these steps as a visual reference. Thank you [Sam Csik](https://samanthacsik.github.io/), who created this great resource!
+
+
+![](images/create-repo.gif){fig-align="center"}
+
+:::
+
+ 
+ 
+1-file simple app (30 min) - 
+
+Exercise 1 (15 min)
+
+Exercise 2 (15 min)
+
+Additional
+Boilerplate apps / templates
 
 ## Shini cont'
 

@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Reactivity is <strong>what makes Shiny apps responsive</strong> i.e.&nbsp;it lets the app instantly update itself whenever the user makes a change. At a very basic level, it looks something like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/reactivity-intro.png" class="img-fluid figure-img"></p>
+<p><img src="images/reactivity-intro.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption>Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB</figcaption>
 </figure>
 </div>
@@ -234,8 +234,70 @@ How to understand reactivity?
 <p>Check out Garrett Grolemund’s article, <a href="https://shiny.posit.co/r/articles/build/understanding-reactivity/"><em>How to understand reactivity</em></a> in R for a more detailed overview of Shiny reactivity.</p>
 </div>
 </div>
-<p>Creating your first Shiny App - Boilerpalete template provided by RStudio (why yes, why no) - One-file App Example (From template) – Follow example on video. (20 min) - Let’s start from scratch – to help us remember the structure - Create a git hub repo - clone - repo structure (10 min) - 1-file simple app (25 min) - Exercise 1 (15 min)</p>
 </section>
+</section>
+<section id="on-file-organization" class="level2">
+<h2 class="anchored" data-anchor-id="on-file-organization">On file organization</h2>
+<p>Before we jump into RStudio to create a Shiny app there a couple more things worth mentioning about the structure of an app. First, when creating an app you have the option of either creating a <strong>single-file app</strong> or a <strong>two-file app</strong>. The in both cases look the same, however the difference is you either have all the code for you app (ui + server) in one script named <code>app.R</code> or you have 2 files, one for ui (`ui.R) and one for then server (server.R)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/one-vs-two.png" class="img-fluid figure-img"></p>
+<figcaption>Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Which one to choose?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It largely comes down to personal preference. A single-file format is best for smaller apps or when creating a reproducible example (<a href="https://mastering-shiny.org/action-workflow.html#getting-help">reprex</a>). While the two-file format is beneficial when writing large, complex apps where breaking apart code can make things a bit more navigable / maintainable.</p>
+</div>
+</div>
+<p><br></p>
+<p>Second, as we have learned through this course, it is always a good idea to create a GitHub repository + an <code>Rproj</code> to house all the moving pieces of our app. The image below presents a general repo structure to stay organized. We will follow this structure for the apps we will create during this lesson.</p>
+<p><br></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/repo-structure-details.png" class="img-fluid figure-img"></p>
+<figcaption>Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB</figcaption>
+</figure>
+</div>
+</section>
+<section id="creating-a-shiny-app" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-shiny-app">Creating a Shiny app</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Set up
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Create a repo to house our soon-to-be app(s). Navigate to your GitHub account, go to Your repositories &gt; Click on New repository. Named it <code>shiny-app-example</code> Remember to initiate your repo with a README and choose R as the language for the default <code>.gitignore</code>.</p></li>
+<li><p>Clone your repo into your RStudio Session in the server. Click on the green “&lt; &gt;Code” button &gt; Copy the HTTPS url and then go to RStudio</p></li>
+<li><p>In RStudio Create a new project. Go to File &gt; New Project &gt; Version Control with Git &gt; paste Repository url &gt; Create Project</p></li>
+</ol>
+<p><br></p>
+<p>The GIF bellow shows each of these steps as a visual reference. Thank you <a href="https://samanthacsik.github.io/">Sam Csik</a>, who created this great resource!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/create-repo.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>1-file simple app (30 min) -</p>
+<p>Exercise 1 (15 min)</p>
+<p>Exercise 2 (15 min)</p>
+<p>Additional Boilerplate apps / templates</p>
 </section>
 <section id="shini-cont" class="level2">
 <h2 class="anchored" data-anchor-id="shini-cont">Shini cont’</h2>
