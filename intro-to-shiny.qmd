@@ -1,0 +1,132 @@
+---
+title: "Introduction to Shiny"
+format: html
+execute: 
+    eval: false
+---
+
+## What is Shiny?
+
+An R package that allows users to create an interactive web application using R code. This packages calls for HTML, JavaScript and CSS without you having to learn them.
+
+Think interactive web pages built by people who love to code in R, no JavaScript experience necessary.
+
+::: column-margin
+![](images/shiny-hex.png){width="80%" fig-align="right"}
+:::
+
+> "Shiny is an open source R package that provides an elegant and powerful web framework for building web applications using R. Shiny helps you turn your analyses into interactive web applications without requiring HTML, CSS, or JavaScript knowledge.” - Posit
+
+The big benefits of Shiny is that you create an interactive web application just by understanding the Shiny framework in R and present all the cool visualization you create using R packages in an interactive platform.
+
+### Why build a Shiny App? {.unnumbered}
+
+-   Share data in an engaging format - allowing your audience to interact with your data. Example: [HydroTech Helper](https://danielkerstan.shinyapps.io/usgs_water_data/?_inputs_&state=%22%22) by Daniel Kerstan. An app to access real-time monitoring of USGS hydrology sites.
+
+-   To make tools you create in R accessible to others. Particularly those who do not know R. Instead of sharing your code, you share your app and everyone can see the output. Example: [Marine Mammal Bycatch Impacts App](https://msiple.shinyapps.io/mmrefpoints/) by Dr. Margaret Siple. [Source code](https://github.com/mcsiple/mmrefpoints)
+
+-   Create resources for others to use. Example: [Novel-gazing App](https://msiple.shinyapps.io/NovelGazingApp/) by Dr. Margaret Siple. [Source code](https://github.com/mcsiple/novelgazing)
+
+## The Anatomy of a Shiny App
+
+### What are the building blocks of a Shiny app?{.unnumbered}
+
+
+Shiny apps are composed in two parts: 
+
+1. A web page that displays the app to a user (i.e. the user interface, or UI for short - frontend), and
+2. A computer that powers the app (i.e. the server - backend)
+
+
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/basic_shiny_app.png)
+
+
+
+The **UI** controls the layout and appearance of your app and is written in HTML (but we use functions from the {shiny} package to write that HTML). The **server** handles the logic of the app – in other words, it is a set of instructions that tells the web page what to display when a user interacts with it.
+
+Let's take a look at how the code for a *very simple* Shiny app would look like to get a sense of the fundamental architecture of this tool.
+
+```{r very-basic-shiny}
+library(shiny)
+
+# Define the UI
+ui <- shiny::fluidPage( # <1>
+  "Hello there!"
+)
+
+# Define the server
+server <- function(input, output){ } # <2>
+
+# Generate the app
+shiny::shinyApp(ui = ui, server = server)
+```
+
+1.  The `fluidPage` is a function that generates a page. It is important for allowing flexibility in UI layout which we'll dive deeper later.
+
+2.  The server is actually a function with input and output as arguments. , where you'll add all the code related to the computations.Because this app has no inputs or outputs, it doesn't need anything in the 'server' component (though it still does require an "empty server")
+
+If we run the code above, we should see an app that is a blank white page with "Hello there!" written in the top left in plain text.
+
+![](images/very-basic-app.png){width="80%"}
+
+With this code we have essentially built a Shiny app. More complicated apps will certainly have more content in the UI and server sections but all Shiny apps will have this tripartite structure (Define UI, Define the Server and Generate the app).
+
+### What will go in each section? {.unnumbered}
+
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Section    | Component                                                                                                                                   |
++============+=============================================================================================================================================+
+| **UI**     | -   [Layout](https://shiny.posit.co/r/articles/build/layout-guide/) - how the different components of the app are arranged.                 |
+|            |                                                                                                                                             |
+|            | -   [Theme](https://shiny.posit.co/r/articles/build/themes/index.html) - defines the overall appearance of your app.                        |
+|            |                                                                                                                                             |
+|            | -   Inputs - or **widgets** ways the user can interact with (e.g. toggle, slide) and provide values to your app.                            |
+|            |                                                                                                                                             |
+|            | -   Outputs - The R objects that your user sees (e.g. tables, plots). Outputs respond when a user interacts with or changes an input value. |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| **Server** | -   Computations - code that will create the outputs displayed in your app (values, tables, plots, etc).                                    |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+### More on widgets and outputs {.unnumbered}
+
+> Widgets are web elements that users can interact with via the UI.
+
+Widgets collect information from the user which is then used to update outputs created in the server. Shiny provides a set of [standard widgets](https://shiny.posit.co/r/gallery/) (see image below), but you can also explore widget extensions using a variety of other packages (e.g. `{shinyWidgets}`, `{DT}`, `{plotly}`)
+
+![](images/basic-widgets.png){width="80%"}
+
+Outputs are R objects you will display on your app. This can be plots, tables, values, or others. Generally, these outputs are going to react to as the user interact with the inputs.
+
+Example of input widgets and an output plot.
+
+
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/input-output-app.png){width="80%"}
+
+
+### Reactivity (in brief) 
+
+Reactivity is **what makes Shiny apps responsive** i.e. it lets the app instantly update itself whenever the user makes a change. At a very basic level, it looks something like this:
+
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/reactivity-intro.png)
+
+:::callout-tip
+## How to understand reactivity?
+
+Check out Garrett Grolemund’s article, [_How to understand reactivity_](https://shiny.posit.co/r/articles/build/understanding-reactivity/) in R for a more detailed overview of Shiny reactivity.
+:::
+
+
+
+
+Creating your first Shiny App - Boilerpalete template provided by RStudio (why yes, why no) - One-file App Example (From template) -- Follow example on video. (20 min) - Let's start from scratch -- to help us remember the structure - Create a git hub repo - clone - repo structure (10 min) - 1-file simple app (25 min) - Exercise 1 (15 min)
+
+## Shini cont'
+
+-   2 file app (live code and follow) -- Palmer penguin or Dog app? (40 min)
+-   Exercise (15 min)
+-   Deploy App (25)
+-   Q&A (10 min)
