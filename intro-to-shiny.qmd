@@ -262,7 +262,7 @@ ui <- fluidPage(
 
 ### Style text in the UI {.unnumberd}
 
-The **UI** is actually just an HTML document. We can style our text by adding static HTML elements using tags – a list of functions that parallel common HTML tags (e.g. <h1> == tags$h1()) The most common tags also have wrapper functions (e.g. h1()).
+The **UI** is actually just an HTML document. We can style our text by adding static HTML elements using [tags](https://shiny.rstudio.com/articles/tag-glossary.html) – a list of functions that parallel common HTML tags (e.g. `<h1>` == `tags$h1()`) The most common tags also have wrapper functions (e.g. `h1()`).
 
 ```{r}
 # user interface ----
