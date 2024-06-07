@@ -549,7 +549,7 @@ body_mass_df <- penguins %>%
 
 #### Rule 3: Access input values with `input$<id>` {.unnumbered}
 
-Remember tha in our **UI** we we gave the `slidrInput()` an `inputID = body_mass_input`.
+Remember that in our **UI** we we gave the `slidrInput()` an `inputID = body_mass_input`.
 
 ```{r}
 # body mass slider ----
@@ -557,16 +557,133 @@ Remember tha in our **UI** we we gave the `slidrInput()` an `inputID = body_mass
               min = 2700, max = 6300, value = c(3000, 4000))
 ```
 
-Now we need to add the input piece on the server side.
+Now we need to add the input piece on the server side. We can access the values of that slider input in the server using the syntax, `input$body_mass_input`. If you want your output to change according to the input values, substitute hard-coded values (e.g. 2857:5903) with the input values from the UI. For example, `c(input$body_mass_input[1]:input$body_mass_input[2]`
 
- 
-------------------------------------------- 
- 
-1-file simple app (30 min) - 
+:::callout-important
+## Reactive Data Frame
+We need to create a reactive data frame that is able to update according to the input. For this we use the `reactive()` function.
 
-Exercise 1 (15 min)
+When you call your reactive data frame in your ggplot, the data frame name must be followed by ()
+:::
 
-Exercise 2 (15 min)
+
+
+```{r}
+# load packages ----
+library(shiny)
+library(palmerpenguins)
+library(tidyverse)
+
+# user interface ----
+ui <- fluidPage(
+  
+  # ~ previous code omitted for brevity ~
+  
+  # body mass slider ----
+  sliderInput(inputId = "body_mass_input", label = "Select a range of body masses (g):",
+              min = 2700, max = 6300, value = c(3000, 4000)),
+  
+  # body mass plot output ----
+  plotOutput(outputId = "bodyMass_scatterplot_output")
+  
+)
+
+# server instructions ----
+server <- function(input, output) {
+  
+    # filter body masses ----
+  body_mass_df <- reactive({ 
+    penguins %>%  
+      filter(body_mass_g %in% c(input$body_mass_input[1]:input$body_mass_input[2])) 
+  })
+    
+  # render penguin scatter plot ----
+  output$bodyMass_scatterplot_output <- renderPlot({ 
+      ggplot(na.omit(body_mass_df()),
+             aes(x = flipper_length_mm, y = bill_length_mm,
+                 color = species, shape = species)) + 
+        geom_point() + 
+        scale_color_manual(values = c("Adelie" = "#FEA346", "Chinstrap" = "#B251F1", "Gentoo" = "#4BA4A4")) +
+        scale_shape_manual(values = c("Adelie" = 19, "Chinstrap" = 17, "Gentoo" = 15)) +
+        labs(x = "Flipper length (mm)", y = "Bill length (mm)", 
+             color = "Penguin species", shape = "Penguin species") + 
+        theme_minimal() + 
+        theme(legend.position = c(0.85, 0.2), 
+              legend.background = element_rect(color = "white")) 
+  })
+}
+
+```
+
+Now let's tun the app! We should now see a reactive Shiny app. Note that reactivity automatically occurs whenever you use an **input value** to **render** an **output object**.
+
+### Recap: Steps to create a reactive Shiny app
+
+1. We created an `app.R` file in it’s own directory and began our app with the template, though you can also create a _two-file Shiny app_ by using separate `ui.R` and `server.R` files.
+
+
+2. We added an input to the `fluidPage()` in our **UI** using an `*Input()` function and gave it a unique `inputId` (e.g. `inputId = "unique_input_Id_name"`)
+
+
+3. We created a placeholder for our reactive object by using an `*Output()` function in the `fluidPage()` of our **UI** and gave it an `outputId` (e.g. `outputId = "output_Id_name"`)
+
+
+4. We wrote the **server** instructions for how to assemble inputs into outputs, following these rules:
+
+-   Save objects that you want to display to `output$<id>`
+
+-   Build reactive objects using a `render*(`) function (and similarly, build reactive data frames using `reactive()` )
+
+-   Access input values with `input$<id>`
+
+And... we saw that reactivity automatically occurs whenever we use an **input value** to **render** an **output object**.
+
+
+## Your turn
+
+:::callout-note
+## Add another reactive widget
+
+Working alone or in groups, add a reactive `DT` datatable to your app with a `checkboxGroupInput` (widget) that allows users to select which year(s) to include in the table. Configure your `checkboxGroupInput` so that the years 2007 and 2008 are pre-selected.
+
+:::
+
+Remember that the `DT` package allows you to create interactive tables where you can filter, sort, and do lots of other neat things tables in HTML format.
+
+Once you've added the new feature your app should look like this:
+
+![Source: Intro to Shiny - Building reactive apps and dashboards, MEDS, UCSB](images/app1.gif){{fig-align="center"}}
+<br>
+
+:::callout-tip
+## Tips
+
+-   Use `?checkboxGroupInput` to learn more about which arguments you need (remember, all inputs require an `inputId` and oftentimes a `label`, but there are others required to make this work as well)
+
+-   Both `{shiny}` and `{DT}` packages have functions named `dataTableOutput(`) and `renderDataTable()` – `DT::renderDataTable()` allows you to create both server-side and ui-side DataTables and supports additional DataTables features while `shiny::renderDataTable()` only provides server-side DataTables. Be sure to use the one from the `{DT}` package using the syntax `packageName::functionName()`.
+
+-   There are lots of ways to customize DT tables, but to create a basic one, all you need is       `DT::dataTable(your_dataframe)`
+
+**Remember** to follow the steps outlined on the previous slides:
+
+1. Add an input (e.g. `checkboxGroupInput`) to the UI that users can interact with.
+
+2. Add an output (e.g. `DT::datatableOutput`) to the UI that creates a placeholder space to fill with our eventual reactive output.
+
+3. Tell the server how to assemble inputs into outputs following 3 rules:
+
+-   Save objects you want to display to `output$<id>`
+
+-   Build reactive objects using a `render*()` function
+
+-   Access input values with `input$<id>`
+
+:::
+
+
+NOTE:
+Clarify which functions to use in the server side of things vs which function to usi on the UI when creating a DT object!
+
 
 Additional
 Boilerplate apps / templates
